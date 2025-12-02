@@ -9,7 +9,7 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 
 export default function LoginPage() {
   const router = useRouter();
-  const BACKEND_URL = "http://localhost:8000"; // Change on deploy
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,7 +37,7 @@ export default function LoginPage() {
     setError(null);
 
     try {
-      const res = await api.post("/auth/login", { email, password });
+      const res = await api.post(`${BACKEND_URL}/api/v1/auth/login`, { email, password });
       const { access_token, refresh_token } = res.data;
 
       localStorage.setItem("access_token", access_token);

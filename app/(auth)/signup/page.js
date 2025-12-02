@@ -9,7 +9,7 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 
 export default function SignupPage() {
   const router = useRouter();
-  const BACKEND_URL = "http://localhost:8000"; // Change after deployment
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -50,7 +50,7 @@ export default function SignupPage() {
 
     setLoading(true);
     try {
-      const res = await api.post("/auth/signup", { email, password });
+      const res = await api.post(`${BACKEND_URL}/api/v1/auth/signup`, { email, password });
       const { access_token, refresh_token } = res.data;
 
       localStorage.setItem("access_token", access_token);
@@ -113,7 +113,7 @@ export default function SignupPage() {
             </button>
 
             <button
-  onClick={() => (window.location.href = "http://localhost:8000/api/v1/auth/github/login")}
+  onClick={() => (window.location.href = `${BACKEND_URL}/api/v1/auth/github/login`)}
   className="w-full h-11 rounded-xl border border-slate-200 flex items-center justify-center gap-3 text-sm font-medium hover:bg-slate-100 transition"
 >
   <FaGithub /> Sign up with GitHub
