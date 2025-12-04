@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
-import { PageTransition } from "../components/UI";
+import { PageTransition } from "../components/ui";
 
 export const metadata = {
   title: "RankPost",
