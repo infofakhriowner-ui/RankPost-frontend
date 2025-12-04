@@ -57,6 +57,7 @@ export default function SignupPage() {
       if (refresh_token) localStorage.setItem("refresh_token", refresh_token);
 
       router.push("/dashboard");
+      window.location.reload();
     } catch (err) {
       setError(err?.response?.data?.detail || "Signup failed");
     } finally {
