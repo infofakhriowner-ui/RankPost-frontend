@@ -50,7 +50,7 @@ export default function SignupPage() {
 
     setLoading(true);
     try {
-      const res = await api.post(`${BACKEND_URL}/api/v1/auth/signup`, { email, password });
+      const res = await api.post("/auth/signup", { email, password });
       const { access_token, refresh_token } = res.data;
 
       localStorage.setItem("access_token", access_token);
