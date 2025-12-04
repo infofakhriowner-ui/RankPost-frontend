@@ -6,7 +6,7 @@ import Link from "next/link";
 import api from "../../utils/api";
 import { FaGoogle, FaFacebookF, FaGithub } from "react-icons/fa";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { LoadingButton, PageTransition } from "../../components/UI";
+import { LoadingButton, PageTransition } from "../../../components/ui";
 
 export default function SignupPage() {
   const router = useRouter();
