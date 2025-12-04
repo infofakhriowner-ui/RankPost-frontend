@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import { PageTransition } from "../components/UI";
 
 export const metadata = {
   title: "RankPost",
@@ -13,10 +14,12 @@ export default function RootLayout({ children }) {
       <body className="bg-white text-gray-900">
         <Nav />
 
-        {/* Main content wrapper under navbar spacing */}
-        <main className="max-w-7xl mx-auto px-6 pt-28 pb-12">
-          {children}
-        </main>
+        {/* Smooth Page Transition Wrapper */}
+        <PageTransition>
+          <main className="max-w-7xl mx-auto px-6 pt-28 pb-12">
+            {children}
+          </main>
+        </PageTransition>
 
         <Footer />
       </body>
