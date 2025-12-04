@@ -14,7 +14,6 @@ export default function RootLayout({ children }) {
       <body className="bg-white text-gray-900">
         <Nav />
 
-        {/* Smooth Page Transition Wrapper */}
         <PageTransition>
           <main className="max-w-7xl mx-auto px-6 pt-28 pb-12">
             {children}
