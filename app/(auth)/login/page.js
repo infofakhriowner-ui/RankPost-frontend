@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import api from "../../../utils/api";
+import api from "../../utils/api";
 import { FaGoogle, FaFacebookF, FaGithub } from "react-icons/fa";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { LoadingButton, PageTransition } from "../../../components/ui";
