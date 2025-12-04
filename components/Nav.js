@@ -133,40 +133,78 @@ useEffect(() => {
 
       </div>
 
-      {/* MOBILE MENU */}
-<div className={`md:hidden overflow-hidden transition-all duration-300 bg-white border-t border-gray-200 ${
-  mobileOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
-}`}>
+     {/* MOBILE MENU */}
+<div
+  className={`md:hidden overflow-hidden transition-all duration-300 bg-white border-t border-gray-200 ${
+    mobileOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
+  }`}
+>
   <div className="flex flex-col gap-3 px-6 py-4 text-gray-700 font-medium">
 
     {/* NOT LOGGED IN MENU */}
     {!isLoggedIn && (
       <>
-        <Link href="/" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Home</Link>
-        <Link href="#features" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Features</Link>
-        <Link href="#demo" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">Demo</Link>
-        <Link href="/Pricing" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Pricing</Link>
-        <Link href="#about" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">About</Link>
-        <Link href="#faq" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">FAQ</Link>
-        <Link href="#contact" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">Contact</Link>
+        <ReloadLink href="/" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">
+          Home
+        </ReloadLink>
+
+        <ReloadLink href="#features" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">
+          Features
+        </ReloadLink>
+
+        <ReloadLink href="#demo" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">
+          Demo
+        </ReloadLink>
+
+        <ReloadLink href="/Pricing" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">
+          Pricing
+        </ReloadLink>
+
+        <ReloadLink href="#about" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">
+          About
+        </ReloadLink>
+
+        <ReloadLink href="#faq" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">
+          FAQ
+        </ReloadLink>
+
+        <ReloadLink href="#contact" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">
+          Contact
+        </ReloadLink>
 
         {/* More */}
-        <button onClick={() => setShowMore(!showMore)} className="text-left w-full font-semibold hover:text-[#34A853]">
+        <button
+          onClick={() => setShowMore(!showMore)}
+          className="text-left w-full font-semibold hover:text-[#34A853]"
+        >
           More ▾
         </button>
 
         {showMore && (
           <div className="flex flex-col gap-2 pl-4 mt-1 border-l">
-            <Link href="/Terms" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Terms</Link>
-            <Link href="/Privacy" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Privacy</Link>
-            <Link href="/Refund" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Refund</Link>
+            <ReloadLink href="/Terms" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">
+              Terms
+            </ReloadLink>
+
+            <ReloadLink href="/Privacy" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">
+              Privacy
+            </ReloadLink>
+
+            <ReloadLink href="/Refund" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">
+              Refund
+            </ReloadLink>
           </div>
         )}
 
         {/* Auth buttons */}
         <div className="pt-3 border-t flex flex-col gap-2">
-          <Link href="/login" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Login</Link>
-          <Link href="/signup" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Sign Up</Link>
+          <ReloadLink href="/login" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">
+            Login
+          </ReloadLink>
+
+          <ReloadLink href="/signup" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">
+            Sign Up
+          </ReloadLink>
         </div>
       </>
     )}
@@ -174,13 +212,33 @@ useEffect(() => {
     {/* LOGGED IN MENU */}
     {isLoggedIn && (
       <>
-        <Link href="/dashboard" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Dashboard</Link>
-        <Link href="/sites" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Add Site</Link>
-        <Link href="/articles" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">Create Post</Link>
-        <Link href="/history" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Post History</Link>
-        <Link href="/billing" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Billing</Link>
-        <Link href="/profile" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Profile</Link>
-        <Link href="/preferences" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Preferences</Link>
+        <ReloadLink href="/dashboard" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">
+          Dashboard
+        </ReloadLink>
+
+        <ReloadLink href="/sites" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">
+          Add Site
+        </ReloadLink>
+
+        <ReloadLink href="/articles" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">
+          Create Post
+        </ReloadLink>
+
+        <ReloadLink href="/history" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">
+          Post History
+        </ReloadLink>
+
+        <ReloadLink href="/billing" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">
+          Billing
+        </ReloadLink>
+
+        <ReloadLink href="/profile" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">
+          Profile
+        </ReloadLink>
+
+        <ReloadLink href="/preferences" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">
+          Preferences
+        </ReloadLink>
 
         <button
           onClick={handleLogout}
