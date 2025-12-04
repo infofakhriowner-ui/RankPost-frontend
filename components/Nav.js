@@ -21,6 +21,23 @@ export default function Navbar() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
+  // 🔥 Sync login state jab token change ho ya page focus ho
+useEffect(() => {
+  const syncAuth = () => {
+    const token = localStorage.getItem("access_token");
+    setIsLoggedIn(!!token);
+    if (token) fetchUserCredits();
+  };
+
+  window.addEventListener("focus", syncAuth);
+  window.addEventListener("storage", syncAuth);
+
+  return () => {
+    window.removeEventListener("focus", syncAuth);
+    window.removeEventListener("storage", syncAuth);
+  };
+}, []);
 
   const fetchUserCredits = async () => {
     try {
