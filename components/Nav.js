@@ -11,6 +11,7 @@ export default function Navbar() {
   const [credits, setCredits] = useState(0);
   const [scrolled, setScrolled] = useState(false);
 
+  // INITIAL TOKEN CHECK
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     setIsLoggedIn(!!token);
@@ -21,24 +22,25 @@ export default function Navbar() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
-  // 🔥 Sync login state jab token change ho ya page focus ho
-useEffect(() => {
-  const syncAuth = () => {
-    const token = localStorage.getItem("access_token");
-    setIsLoggedIn(!!token);
-    if (token) fetchUserCredits();
-  };
 
-  window.addEventListener("focus", syncAuth);
-  window.addEventListener("storage", syncAuth);
+  // SYNC TOKEN WHEN USER RETURNS TO PAGE
+  useEffect(() => {
+    const syncAuth = () => {
+      const token = localStorage.getItem("access_token");
+      setIsLoggedIn(!!token);
+      if (token) fetchUserCredits();
+    };
 
-  return () => {
-    window.removeEventListener("focus", syncAuth);
-    window.removeEventListener("storage", syncAuth);
-  };
-}, []);
+    window.addEventListener("focus", syncAuth);
+    window.addEventListener("storage", syncAuth);
 
+    return () => {
+      window.removeEventListener("focus", syncAuth);
+      window.removeEventListener("storage", syncAuth);
+    };
+  }, []);
+
+  // FETCH USER CREDITS
   const fetchUserCredits = async () => {
     try {
       const res = await api.get("/users/me");
@@ -48,6 +50,7 @@ useEffect(() => {
     }
   };
 
+  // LOGOUT
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
@@ -64,6 +67,7 @@ useEffect(() => {
         scrolled ? "shadow-md" : "shadow-none"
       }`}
     >
+      {/* TOP BAR */}
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* LOGO */}
@@ -130,124 +134,60 @@ useEffect(() => {
 
         {/* MOBILE CONTROLS */}
         <button onClick={() => setMobileOpen(!mobileOpen)} className="text-3xl md:hidden">☰</button>
-
       </div>
 
-     {/* MOBILE MENU */}
-<div
-  className={`md:hidden overflow-hidden transition-all duration-300 bg-white border-t border-gray-200 ${
-    mobileOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
-  }`}
->
-  <div className="flex flex-col gap-3 px-6 py-4 text-gray-700 font-medium">
+      {/* MOBILE MENU */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 bg-white border-t border-gray-200 ${
+          mobileOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="flex flex-col gap-3 px-6 py-4 text-gray-700 font-medium">
 
-    {/* NOT LOGGED IN MENU */}
-    {!isLoggedIn && (
-      <>
-        <ReloadLink href="/" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">
-          Home
-        </ReloadLink>
+          {/* NOT LOGGED IN */}
+          {!isLoggedIn && (
+            <>
+              <ReloadLink href="/" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Home</ReloadLink>
+              <ReloadLink href="#features" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Features</ReloadLink>
+              <ReloadLink href="#demo" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">Demo</ReloadLink>
+              <ReloadLink href="/Pricing" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Pricing</ReloadLink>
+              <ReloadLink href="#about" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">About</ReloadLink>
+              <ReloadLink href="#faq" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">FAQ</ReloadLink>
+              <ReloadLink href="#contact" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">Contact</ReloadLink>
 
-        <ReloadLink href="#features" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">
-          Features
-        </ReloadLink>
+              <button onClick={() => setShowMore(!showMore)} className="text-left w-full font-semibold hover:text-[#34A853]">More ▾</button>
 
-        <ReloadLink href="#demo" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">
-          Demo
-        </ReloadLink>
+              {showMore && (
+                <div className="flex flex-col gap-2 pl-4 mt-1 border-l">
+                  <ReloadLink href="/Terms" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Terms</ReloadLink>
+                  <ReloadLink href="/Privacy" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Privacy</ReloadLink>
+                  <ReloadLink href="/Refund" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Refund</ReloadLink>
+                </div>
+              )}
 
-        <ReloadLink href="/Pricing" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">
-          Pricing
-        </ReloadLink>
+              <div className="pt-3 border-t flex flex-col gap-2">
+                <ReloadLink href="/login" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Login</ReloadLink>
+                <ReloadLink href="/signup" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Sign Up</ReloadLink>
+              </div>
+            </>
+          )}
 
-        <ReloadLink href="#about" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">
-          About
-        </ReloadLink>
+          {/* LOGGED IN */}
+          {isLoggedIn && (
+            <>
+              <ReloadLink href="/dashboard" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Dashboard</ReloadLink>
+              <ReloadLink href="/sites" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Add Site</ReloadLink>
+              <ReloadLink href="/articles" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">Create Post</ReloadLink>
+              <ReloadLink href="/history" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Post History</ReloadLink>
+              <ReloadLink href="/billing" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Billing</ReloadLink>
+              <ReloadLink href="/profile" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Profile</ReloadLink>
+              <ReloadLink href="/preferences" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Preferences</ReloadLink>
 
-        <ReloadLink href="#faq" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">
-          FAQ
-        </ReloadLink>
-
-        <ReloadLink href="#contact" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">
-          Contact
-        </ReloadLink>
-
-        {/* More */}
-        <button
-          onClick={() => setShowMore(!showMore)}
-          className="text-left w-full font-semibold hover:text-[#34A853]"
-        >
-          More ▾
-        </button>
-
-        {showMore && (
-          <div className="flex flex-col gap-2 pl-4 mt-1 border-l">
-            <ReloadLink href="/Terms" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">
-              Terms
-            </ReloadLink>
-
-            <ReloadLink href="/Privacy" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">
-              Privacy
-            </ReloadLink>
-
-            <ReloadLink href="/Refund" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">
-              Refund
-            </ReloadLink>
-          </div>
-        )}
-
-        {/* Auth buttons */}
-        <div className="pt-3 border-t flex flex-col gap-2">
-          <ReloadLink href="/login" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">
-            Login
-          </ReloadLink>
-
-          <ReloadLink href="/signup" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">
-            Sign Up
-          </ReloadLink>
+              <button onClick={handleLogout} className="pt-3 border-t text-left font-semibold text-gray-700 hover:text-[#EA4335]">Logout</button>
+            </>
+          )}
         </div>
-      </>
-    )}
-
-    {/* LOGGED IN MENU */}
-    {isLoggedIn && (
-      <>
-        <ReloadLink href="/dashboard" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">
-          Dashboard
-        </ReloadLink>
-
-        <ReloadLink href="/sites" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">
-          Add Site
-        </ReloadLink>
-
-        <ReloadLink href="/articles" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">
-          Create Post
-        </ReloadLink>
-
-        <ReloadLink href="/history" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">
-          Post History
-        </ReloadLink>
-
-        <ReloadLink href="/billing" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">
-          Billing
-        </ReloadLink>
-
-        <ReloadLink href="/profile" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">
-          Profile
-        </ReloadLink>
-
-        <ReloadLink href="/preferences" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">
-          Preferences
-        </ReloadLink>
-
-        <button
-          onClick={handleLogout}
-          className="pt-3 border-t text-left font-semibold text-gray-700 hover:text-[#EA4335]"
-        >
-          Logout
-        </button>
-      </>
-    )}
-
-  </div>
-</div>
+      </div>
+    </nav>
+  );
+}
