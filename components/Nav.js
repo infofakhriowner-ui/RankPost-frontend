@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import api from "../app/utils/api";
+import ReloadLink from "../components/ReloadLink";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -50,7 +50,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         {/* LOGO */}
-        <Link href="/" className="flex items-center font-bold text-2xl tracking-tight select-none">
+        <ReloadLink href="/" className="flex items-center font-bold text-2xl tracking-tight select-none">
           <span className="text-[#4285F4]">R</span>
           <span className="text-[#EA4335]">a</span>
           <span className="text-[#FBBC05]">n</span>
@@ -59,38 +59,38 @@ export default function Navbar() {
           <span className="text-[#EA4335]">o</span>
           <span className="text-[#FBBC05]">s</span>
           <span className="text-[#34A853]">t</span>
-        </Link>
+        </ReloadLink>
 
         {/* DESKTOP MENU */}
         <div className="hidden md:flex items-center gap-8 text-gray-700 font-medium">
           {!isLoggedIn ? (
             <>
-              <Link href="/" className={`hover:text-[#4285F4] ${isActive("/") && "font-bold text-[#4285F4]"}`}>Home</Link>
-              <Link href="#features" className="hover:text-[#EA4335]">Features</Link>
-              <Link href="#demo" className="hover:text-[#FBBC05]">Demo</Link>
-              <Link href="/Pricing" className={`hover:text-[#34A853] ${isActive("/Pricing") && "font-bold text-[#34A853]"}`}>Pricing</Link>
-              <Link href="#about" className="hover:text-[#4285F4]">About</Link>
-              <Link href="#faq" className="hover:text-[#EA4335]">FAQ</Link>
-              <Link href="#contact" className="hover:text-[#FBBC05]">Contact</Link>
+              <ReloadLink href="/" className={`hover:text-[#4285F4] ${isActive("/") && "font-bold text-[#4285F4]"}`}>Home</ReloadLink>
+              <ReloadLink href="#features" className="hover:text-[#EA4335]">Features</ReloadLink>
+              <ReloadLink href="#demo" className="hover:text-[#FBBC05]">Demo</ReloadLink>
+              <ReloadLink href="/Pricing" className={`hover:text-[#34A853] ${isActive("/Pricing") && "font-bold text-[#34A853]"}`}>Pricing</ReloadLink>
+              <ReloadLink href="#about" className="hover:text-[#4285F4]">About</ReloadLink>
+              <ReloadLink href="#faq" className="hover:text-[#EA4335]">FAQ</ReloadLink>
+              <ReloadLink href="#contact" className="hover:text-[#FBBC05]">Contact</ReloadLink>
 
               <div className="relative group">
                 <button className="hover:text-[#34A853]">More ▾</button>
                 <div className="absolute hidden group-hover:block transition-all duration-200 bg-white rounded-md shadow-md py-2 w-40">
-                  <Link href="/Terms" className="block px-4 py-2 hover:bg-gray-100">Terms</Link>
-                  <Link href="/Privacy" className="block px-4 py-2 hover:bg-gray-100">Privacy</Link>
-                  <Link href="/Refund" className="block px-4 py-2 hover:bg-gray-100">Refund</Link>
+                  <ReloadLink href="/Terms" className="block px-4 py-2 hover:bg-gray-100">Terms</ReloadLink>
+                  <ReloadLink href="/Privacy" className="block px-4 py-2 hover:bg-gray-100">Privacy</ReloadLink>
+                  <ReloadLink href="/Refund" className="block px-4 py-2 hover:bg-gray-100">Refund</ReloadLink>
                 </div>
               </div>
             </>
           ) : (
             <>
-              <Link href="/dashboard" className="hover:text-[#4285F4]">Dashboard</Link>
-              <Link href="/sites" className="hover:text-[#EA4335]">Add Site</Link>
-              <Link href="/articles" className="hover:text-[#FBBC05]">Create Post</Link>
-              <Link href="/history" className="hover:text-[#34A853]">Post History</Link>
-              <Link href="/billing" className="hover:text-[#34A853]">Billing</Link>
-              <Link href="/profile" className="hover:text-[#4285F4]">Profile</Link>
-              <Link href="/preferences" className="hover:text-[#EA4335]">Preferences</Link>
+              <ReloadLink href="/dashboard" className="hover:text-[#4285F4]">Dashboard</ReloadLink>
+              <ReloadLink href="/sites" className="hover:text-[#EA4335]">Add Site</ReloadLink>
+              <ReloadLink href="/articles" className="hover:text-[#FBBC05]">Create Post</ReloadLink>
+              <ReloadLink href="/history" className="hover:text-[#34A853]">Post History</ReloadLink>
+              <ReloadLink href="/billing" className="hover:text-[#34A853]">Billing</ReloadLink>
+              <ReloadLink href="/profile" className="hover:text-[#4285F4]">Profile</ReloadLink>
+              <ReloadLink href="/preferences" className="hover:text-[#EA4335]">Preferences</ReloadLink>
             </>
           )}
         </div>
@@ -98,15 +98,15 @@ export default function Navbar() {
         {/* DESKTOP RIGHT SIDE */}
         {!isLoggedIn ? (
           <div className="hidden md:flex items-center gap-4">
-            <Link href="/login" className="font-semibold text-gray-700 hover:text-[#4285F4]">Login</Link>
-            <Link href="/signup" className="px-4 py-2 font-semibold text-sm text-white bg-[#4285F4] hover:bg-[#357ae8] rounded-lg">
+            <ReloadLink href="/login" className="font-semibold text-gray-700 hover:text-[#4285F4]">Login</ReloadLink>
+            <ReloadLink href="/signup" className="px-4 py-2 font-semibold text-sm text-white bg-[#4285F4] hover:bg-[#357ae8] rounded-lg">
               Sign Up
-            </Link>
+            </ReloadLink>
           </div>
         ) : (
           <div className="hidden md:flex items-center gap-4">
             <span className="px-3 py-1 rounded-full bg-[#FBBC05]/20 text-[#d97706] font-semibold text-sm">🔥 {credits} Credits</span>
-            <Link href="/billing" className="px-4 py-2 text-sm font-semibold rounded-lg text-white bg-[#34A853] hover:bg-[#2E7D3C]">Buy Credits</Link>
+            <ReloadLink href="/billing" className="px-4 py-2 text-sm font-semibold rounded-lg text-white bg-[#34A853] hover:bg-[#2E7D3C]">Buy Credits</ReloadLink>
             <button onClick={handleLogout} className="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-[#EA4335]">Logout</button>
           </div>
         )}
@@ -122,13 +122,13 @@ export default function Navbar() {
       }`}>
         <div className="flex flex-col gap-3 px-6 py-4 text-gray-700 font-medium">
 
-          <Link href="/" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Home</Link>
-          <Link href="#features" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Features</Link>
-          <Link href="#demo" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">Demo</Link>
-          <Link href="/Pricing" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Pricing</Link>
-          <Link href="#about" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">About</Link>
-          <Link href="#faq" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">FAQ</Link>
-          <Link href="#contact" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">Contact</Link>
+          <ReloadLink href="/" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Home</ReloadLink>
+          <ReloadLink href="#features" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Features</ReloadReloadLink>
+          <ReloadLink href="#demo" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">Demo</ReloadLink>
+          <ReloadLink href="/Pricing" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Pricing</ReloadLink>
+          <ReloadLink href="#about" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">About</ReloadLink>
+          <ReloadLink href="#faq" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">FAQ</ReloadLink>
+          <ReloadLink href="#contact" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">Contact</ReloadLink>
 
           {/* MOBILE MORE DROPDOWN */}
           <button onClick={() => setShowMore(!showMore)} className="text-left w-full font-semibold hover:text-[#34A853]">
@@ -137,17 +137,17 @@ export default function Navbar() {
 
           {showMore && (
             <div className="flex flex-col gap-2 pl-4 mt-1 border-l">
-              <Link href="/Terms" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Terms</Link>
-              <Link href="/Privacy" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Privacy</Link>
-              <Link href="/Refund" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Refund</Link>
+              <ReloadLink href="/Terms" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Terms</ReloadLink>
+              <ReloadLink href="/Privacy" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Privacy</ReloadLink>
+              <ReloadLink href="/Refund" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Refund</ReloadLink>
             </div>
           )}
 
           {/* MOBILE LOGIN/LOGOUT */}
           {!isLoggedIn ? (
             <div className="pt-3 border-t flex flex-col gap-2">
-              <Link href="/login" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Login</Link>
-              <Link href="/signup" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Sign Up</Link>
+              <ReloadLink href="/login" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Login</ReloadLink>
+              <ReloadLink href="/signup" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Sign Up</ReloadLink>
             </div>
           ) : (
             <button
