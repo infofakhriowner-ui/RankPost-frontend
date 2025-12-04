@@ -37,7 +37,7 @@ export default function LoginPage() {
     setError(null);
 
     try {
-      const res = await api.post(`${BACKEND_URL}/api/v1/auth/login`, { email, password });
+const res = await api.post("/auth/login", { email, password });
       const { access_token, refresh_token } = res.data;
 
       localStorage.setItem("access_token", access_token);
