@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import api from "../../utils/api";
+import api from "../../../utils/api";
 import { FaGoogle, FaFacebookF, FaGithub } from "react-icons/fa";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { LoadingButton, PageTransition } from "../../../components/ui";
@@ -19,7 +19,16 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Social Login
+  // 👉 Already logged in? redirect to dashboard
+  useEffect(() => {
+    const token =
+      typeof window !== "undefined" && localStorage.getItem("access_token");
+    if (token) {
+      router.replace("/dashboard");
+    }
+  }, []);
+
+  // 👉 Social Login Handlers
   const googleLogin = () => {
     window.location.href = `${BACKEND_URL}/api/v1/auth/google/login`;
   };
@@ -32,6 +41,7 @@ export default function LoginPage() {
     window.location.href = `${BACKEND_URL}/api/v1/auth/facebook/login`;
   };
 
+  // 👉 Submit Login Form
   const submit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -48,7 +58,7 @@ export default function LoginPage() {
       }
 
       router.push("/dashboard");
-      window.location.reload();
+      window.location.reload(); // 🔥 Menu instantly updates after login
     } catch (err) {
       setError(err?.response?.data?.detail || "Invalid email or password");
     } finally {
@@ -81,9 +91,7 @@ export default function LoginPage() {
           <div className="w-full max-w-md">
 
             <h1 className="text-3xl font-bold text-slate-900">Sign in</h1>
-            <p className="text-slate-600 mt-2 text-sm">
-              Continue where you left off.
-            </p>
+            <p className="text-slate-600 mt-2 text-sm">Continue where you left off.</p>
 
             {/* SOCIAL LOGINS */}
             <div className="space-y-3 mt-6">
@@ -128,7 +136,9 @@ export default function LoginPage() {
 
               {/* EMAIL */}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1">Email</label>
+                <label className="block text-sm font-semibold text-slate-700 mb-1">
+                  Email
+                </label>
                 <input
                   type="email"
                   required
@@ -140,7 +150,9 @@ export default function LoginPage() {
 
               {/* PASSWORD */}
               <div className="relative">
-                <label className="block text-sm font-semibold text-slate-700 mb-1">Password</label>
+                <label className="block text-sm font-semibold text-slate-700 mb-1">
+                  Password
+                </label>
                 <input
                   type={showPassword ? "text" : "password"}
                   required
@@ -156,7 +168,7 @@ export default function LoginPage() {
                 </span>
               </div>
 
-              {/* REMEMBER + FORGOT */}
+              {/* REMEMBER ME + FORGOT */}
               <div className="flex items-center justify-between">
                 <label className="flex items-center gap-2 text-sm text-slate-600">
                   <input
@@ -176,7 +188,7 @@ export default function LoginPage() {
                 </Link>
               </div>
 
-              {/* LOADING BUTTON */}
+              {/* SUBMIT BUTTON */}
               <LoadingButton
                 loading={loading}
                 type="submit"
