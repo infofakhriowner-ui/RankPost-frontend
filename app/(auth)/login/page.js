@@ -48,6 +48,7 @@ export default function LoginPage() {
       }
 
       router.push("/dashboard");
+      window.location.reload();
     } catch (err) {
       setError(err?.response?.data?.detail || "Invalid email or password");
     } finally {
