@@ -1,16 +1,21 @@
 "use client";
 
-export default function ReloadLink({ href, children, ...props }) {
+import Link from "next/link";
+
+export default function ReloadLink({ href, children, className = "", ...props }) {
+  const handleClick = (e) => {
+    e.preventDefault(); // Stop Next.js SPA navigation
+    window.location.href = href; // FORCE full page reload
+  };
+
   return (
-    <a
-      {...props}
+    <Link
       href={href}
-      onClick={(e) => {
-        e.preventDefault();
-        window.location.href = href; // Full page reload
-      }}
+      onClick={handleClick}
+      className={className}
+      {...props}
     >
       {children}
-    </a>
+    </Link>
   );
 }
