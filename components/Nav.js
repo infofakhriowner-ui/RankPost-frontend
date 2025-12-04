@@ -123,7 +123,7 @@ export default function Navbar() {
         <div className="flex flex-col gap-3 px-6 py-4 text-gray-700 font-medium">
 
           <ReloadLink href="/" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">Home</ReloadLink>
-          <ReloadLink href="#features" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Features</ReloadReloadLink>
+          <ReloadLink href="#features" onClick={() => setMobileOpen(false)} className="hover:text-[#EA4335]">Features</ReloadLink>
           <ReloadLink href="#demo" onClick={() => setMobileOpen(false)} className="hover:text-[#FBBC05]">Demo</ReloadLink>
           <ReloadLink href="/Pricing" onClick={() => setMobileOpen(false)} className="hover:text-[#34A853]">Pricing</ReloadLink>
           <ReloadLink href="#about" onClick={() => setMobileOpen(false)} className="hover:text-[#4285F4]">About</ReloadLink>
