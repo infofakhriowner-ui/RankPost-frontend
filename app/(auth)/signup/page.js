@@ -10,7 +10,7 @@ import { LoadingButton, PageTransition } from "../../../components/ui";
 
 export default function SignupPage() {
   const router = useRouter();
-  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
