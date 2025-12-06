@@ -8,8 +8,8 @@ export default function OAuthCallback() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const access = params.get("access");
-    const refresh = params.get("refresh");
+    const access = params.get("access_token");
+    const refresh = params.get("refresh_token");
 
     if (access && refresh) {
       localStorage.setItem("access_token", access);
@@ -23,7 +23,7 @@ export default function OAuthCallback() {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <p className="text-lg font-semibold">Logging you in, please wait…</p>
+      <p className="text-lg font-semibold">Logging you in…</p>
     </div>
   );
 }
