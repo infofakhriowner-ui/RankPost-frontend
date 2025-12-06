@@ -30,7 +30,7 @@ export default function LoginPage() {
 
   // 👉 Social Login Handlers
   const googleLogin = () => {
-  window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/social/google/login`;
+  window.location.href = process.env.NEXT_PUBLIC_GOOGLE_LOGIN_URL;
 };
 
   const githubLogin = () => {
