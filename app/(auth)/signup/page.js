@@ -33,8 +33,8 @@ export default function SignupPage() {
 
   // 👉 Social Signup
   const googleSignup = () => {
-    window.location.href = process.env.NEXT_PUBLIC_GOOGLE_LOGIN_URL;
-  };
+  window.location.href = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/social/google/login`;
+};
 
   const githubSignup = () => {
     window.location.href = `${BACKEND_URL}/api/v1/auth/github/login`;
