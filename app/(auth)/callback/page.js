@@ -8,18 +8,24 @@ export default function OAuthCallback() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const access = params.get("access_token");
-    const refresh = params.get("refresh_token");
 
-    if (access && refresh) {
-      localStorage.setItem("access_token", access);
-      localStorage.setItem("refresh_token", refresh);
+    // Backend se yahi param aa raha hota hai:
+    const token = params.get("token");
 
+    if (token) {
+      // Token ko localStorage me save karo
+      localStorage.setItem("access_token", token);
+
+      // Refresh token backend abhi nahi bhej raha
+      localStorage.setItem("refresh_token", "");
+
+      // Dashboard me redirect
       router.push("/dashboard");
     } else {
+      // Agar token nahi mila to login page pe bhejo
       router.push("/login?error=OAuthFailed");
     }
-  }, []);
+  }, [router]);
 
   return (
     <div className="min-h-screen flex items-center justify-center">
