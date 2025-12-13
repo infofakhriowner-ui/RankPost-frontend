@@ -39,10 +39,16 @@ export default function Dashboard() {
 
   useEffect(() => {
   const token = localStorage.getItem("access_token");
-  if (!token) return;
+
+  // 🔒 HARD GUARD
+  if (!token) {
+    router.replace("/login");
+    return;
+  }
 
   fetchDashboardData();
 }, []);
+
 
   const fetchDashboardData = async () => {
     try {
