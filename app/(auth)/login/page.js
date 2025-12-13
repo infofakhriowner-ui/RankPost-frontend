@@ -21,12 +21,11 @@ export default function LoginPage() {
 
   // 👉 Already logged in? redirect to dashboard
   useEffect(() => {
-    const token =
-      typeof window !== "undefined" && localStorage.getItem("access_token");
-    if (token) {
-      router.replace("/dashboard");
-    }
-  }, []);
+  const token = localStorage.getItem("access_token");
+  if (token && window.location.pathname === "/login") {
+    router.replace("/dashboard");
+  }
+}, []);
 
   // 👉 Social Login Handlers
   const googleLogin = () => {
