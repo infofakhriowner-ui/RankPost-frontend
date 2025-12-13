@@ -38,18 +38,11 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchDashboardData();
-    fetchCredits();
-  }, []);
+  const token = localStorage.getItem("access_token");
+  if (!token) return;
 
-  const fetchCredits = async () => {
-    try {
-      const res = await api.get("/users/me");
-      setCredits(res.data.credits || 0);
-    } catch (err) {
-      console.log("Failed to load credits:", err);
-    }
-  };
+  fetchDashboardData();
+}, []);
 
   const fetchDashboardData = async () => {
     try {
