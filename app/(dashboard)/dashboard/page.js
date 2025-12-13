@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import api from "../../utils/api";
 import {
   Globe,
@@ -24,6 +25,7 @@ import {
 } from "recharts";
 
 export default function Dashboard() {
+  const router = useRouter();
   const [stats, setStats] = useState({
     totalSites: 0,
     totalPosts: 0,
